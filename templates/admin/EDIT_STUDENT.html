@@ -1,0 +1,389 @@
+{#{% extends 'admin/indexhome2.html' %}#}
+{#{% block body %}#}
+{#</head>#}
+{##}
+{#<style>#}
+{#    body {#}
+{#        font-family: Arial, sans-serif;#}
+{#        background-color: #f4f4f4; /* Light background for contrast */#}
+{#        margin: 0;#}
+{#        padding: 20px;#}
+{#    }#}
+{#    .container {#}
+{#        max-width: 600px; /* Set a max width for the container */#}
+{#        margin: auto;#}
+{#        background: white; /* White background for the form */#}
+{#        border-radius: 8px;#}
+{#        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */#}
+{#        padding: 20px;#}
+{#        position: relative; /* For positioning the back button */#}
+{#    }#}
+{#    h2 {#}
+{#        text-align: center;#}
+{#        color: #007BFF; /* Heading color */#}
+{#        margin-bottom: 20px;#}
+{#    }#}
+{#    table {#}
+{#        width: 100%; /* Full width for the table */#}
+{#        border-collapse: collapse; /* Collapse borders for a cleaner look */#}
+{#    }#}
+{#    th {#}
+{#        background-color: #007BFF; /* Header color */#}
+{#        color: white; /* Header text color */#}
+{#        padding: 10px; /* Padding for header */#}
+{#        border-radius: 8px 8px 0 0; /* Rounded top corners */#}
+{#    }#}
+{#    td {#}
+{#        padding: 10px; /* Padding for cells */#}
+{#        border: 1px solid #ddd; /* Light border for cells */#}
+{#        border-radius: 0 0 8px 8px; /* Rounded bottom corners */#}
+{#    }#}
+{#    input[type="text"], input[type="file"], select, textarea {#}
+{#        width: 100%; /* Full width for inputs */#}
+{#        padding: 10px; /* Padding inside inputs */#}
+{#        border-radius: 4px; /* Rounded corners */#}
+{#        border: 1px solid #ccc; /* Light border */#}
+{#        margin-top: 5px; /* Space above inputs */#}
+{#        font-size: 16px; /* Font size */#}
+{#    }#}
+{#    input[type="text"]:focus, select:focus, textarea:focus {#}
+{#        border-color: #007BFF; /* Change border color on focus */#}
+{#        outline: none; /* Remove default outline */#}
+{#    }#}
+{#    input[type="submit"] {#}
+{#        background-color: #007BFF; /* Button background color */#}
+{#        color: white; /* Button text color */#}
+{#        border: none;#}
+{#        border-radius: 4px;#}
+{#        padding: 10px 20px; /* Padding for the button */#}
+{#        cursor: pointer;#}
+{#        font-size: 16px; /* Font size */#}
+{#        margin-top: 10px; /* Space above the button */#}
+{#        transition: background-color 0.3s; /* Smooth background change */#}
+{#    }#}
+{#    input[type="submit"]:hover {#}
+{#        background-color: #0056b3; /* Darker shade on hover */#}
+{#    }#}
+{#    textarea {#}
+{#        height: 100px; /* Set a height for the textarea */#}
+{#        resize: none; /* Prevent resizing */#}
+{#    }#}
+{#    .back-button {#}
+{#        position: absolute; /* Position it at the top left */#}
+{#        top: 10px;#}
+{#        left: 10px;#}
+{#        background-color: #007BFF; /* Background color for the button */#}
+{#        border: none; /* No border */#}
+{#        border-radius: 50%; /* Make it round */#}
+{#        cursor: pointer;#}
+{#        font-size: 24px; /* Increase font size for a bigger arrow */#}
+{#        color: white; /* Color of the arrow */#}
+{#        width: 50px; /* Width of the button */#}
+{#        height: 50px; /* Height of the button */#}
+{#        display: flex;#}
+{#        align-items: center; /* Center the arrow vertically */#}
+{#        justify-content: center; /* Center the arrow horizontally */#}
+{#        transition: transform 0.3s, background-color 0.3s; /* Smooth transitions */#}
+{#    }#}
+{#    .back-button:hover {#}
+{#        background-color: #0056b3; /* Darker shade on hover */#}
+{#        transform: scale(1.1); /* Slightly increase size on hover */#}
+{#    }#}
+{#</style>#}
+{##}
+{#<body>#}
+{#<div class="container">#}
+{#    <button class="back-button" onclick="window.history.back();">&#8592;</button>#}
+{#    <h2>Edit Student</h2>#}
+{#    <form action="/EDIT_STUDENT_post" method="post" enctype="multipart/form-data" name="form1" id="form1">{% csrf_token %}#}
+{#        <table>#}
+{#            <tr>#}
+{#                <th colspan="2">STUDENT DETAILS</th>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>STUDENT NAME</td>#}
+{#                <td><input type="text" name="textfield" value="{{value.name}}" required /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>ADMISSION NUMBER</td>#}
+{#                <td><input type="text" name="textfield2" value="{{value.admissions}}" required /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>BATCH</td>#}
+{#                <td><input type="text" name="textfield3" value="{{value.batch}}" required /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>DEPARTMENT</td>#}
+{#                <td><input type="text" name="textfield4" value="{{value.department}}" required /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>BUS ROUTE</td>#}
+{#                <td>#}
+{#                    <select name="select" required>#}
+{#                        {% for i in val %}#}
+{#                            <option value="{{ i.id }}">{{ i.from1 }} to {{ i.to }}</option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                </td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>EMAIL</td>#}
+{#                <td><input type="text" name="textfield11" value="{{value.email}}" required /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>PHOTO</td>#}
+{#                <td><input type="file" name="photo" /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>PHONE NO</td>#}
+{#                <td><input type="text" name="textfield7" value="{{value.phone}}" required /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>ADDRESS</td>#}
+{#                <td><textarea name="textarea" required>{{value.address}}</textarea></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td colspan="2">#}
+{#                    <div align="center">#}
+{#                        <input type="submit" name="Submit" value="Submit"/>#}
+{#                    </div>#}
+{#                </td>#}
+{#            </tr>#}
+{#        </table>#}
+{#    </form>#}
+{#</div>#}
+{#</body>#}
+{#{% endblock %}#}
+{##}
+
+
+{% extends 'admin/indexhome2.html' %}
+{% block body %}
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4; /* Light background */
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 600px; /* Set a max width for the form */
+        margin: auto;
+        background: white; /* White background for the form */
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        padding: 20px;
+        position: relative; /* For positioning the back button */
+    }
+    h2 {
+        text-align: center;
+        color: #007BFF; /* Heading color */
+        margin-bottom: 20px;
+    }
+    table {
+        width: 100%; /* Full width for the table */
+        border-collapse: collapse; /* Collapse borders for a cleaner look */
+    }
+    th {
+        background-color: #007BFF; /* Header color */
+        color: white; /* Header text color */
+        padding: 10px; /* Padding for header */
+        border-radius: 8px 8px 0 0; /* Rounded top corners */
+    }
+    td {
+        padding: 10px; /* Padding for cells */
+        border: 1px solid #ddd; /* Light border for cells */
+        border-radius: 0 0 8px 8px; /* Rounded bottom corners */
+    }
+    input[type="text"], input[type="file"], select, textarea {
+        width: 100%; /* Full width for inputs */
+        padding: 10px; /* Padding inside inputs */
+        border-radius: 4px; /* Rounded corners */
+        border: 1px solid #ccc; /* Light border */
+        margin-top: 5px; /* Space above inputs */
+        font-size: 16px; /* Font size */
+    }
+    input[type="text"]:focus, select:focus, textarea:focus {
+        border-color: #007BFF; /* Change border color on focus */
+        outline: none; /* Remove default outline */
+    }
+    input[type="submit"] {
+        background-color: #007BFF; /* Button background color */
+        color: white; /* Button text color */
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px; /* Padding for the button */
+        cursor: pointer;
+        font-size: 16px; /* Font size */
+        margin-top: 10px; /* Space above the button */
+        transition: background-color 0.3s; /* Smooth background change */
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+    }
+    textarea {
+        height: 100px; /* Set a height for the textarea */
+        resize: none; /* Prevent resizing */
+    }
+    .back-button {
+        position: absolute; /* Position it at the top left */
+        top: 10px;
+        left: 10px;
+        background-color: #007BFF; /* Background color for the button */
+        border: none; /* No border */
+        border-radius: 50%; /* Make it round */
+        cursor: pointer;
+        font-size: 24px; /* Increase font size for a bigger arrow */
+        color: white; /* Color of the arrow */
+        width: 50px; /* Width of the button */
+        height: 50px; /* Height of the button */
+        display: flex;
+        align-items: center; /* Center the arrow vertically */
+        justify-content: center; /* Center the arrow horizontally */
+        transition: transform 0.3s, background-color 0.3s; /* Smooth transitions */
+    }
+    .back-button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+        transform: scale(1.1); /* Slightly increase size on hover */
+    }
+</style>
+
+<body>
+<div class="container">
+    <button class="back-button" onclick="window.history.back();">&#8592;</button>
+    <h2>Add Student</h2>
+       <form action="/EDIT_STUDENT_post" method="post" enctype="multipart/form-data" name="form1" id="form1">{% csrf_token %}#}
+        <table>
+            <tr>
+                <th colspan="2">STUDENT DETAILS</th>
+            </tr>
+            <tr>
+                <td>STUDENT NAME</td>
+                <td><input type="text" name="textfield" required value="{{value.name}}"  /></td>
+            </tr>
+            <tr>
+                <td>ADMISSION NUMBER</td>
+                <td><input type="text" name="textfield2" required value="{{value.admissions}}"  /></td>
+            </tr>
+            <tr>
+                <td>BATCH</td>
+                <td><input type="text" name="textfield3" value="{{value.batch}}" required /></td>
+            </tr>
+            <tr>
+                <td>DEPARTMENT</td>
+                <td><select name="textfield4">
+                    <option value="CSE">CS</option>
+                    <option value="EEE">EEE</option>
+                    <option value="CE">CE</option>
+                    <option value="EC">EC</option>
+                    <option value="AAD">AAD</option>
+                    <option value="MECH">MECH</option>
+                </select></td>
+            </tr>
+            <tr>
+    <td>BUS ROUTE</td>
+    <td>
+        <select name="select" required id="route">
+            <option value="">Select</option>
+            {% for i in val %}
+                <option value="{{ i.id }}" {% if i.id == selected_route_id %} selected {% endif %}>
+                    {{ i.from1 }} to {{ i.to }}
+                </option>
+            {% endfor %}
+        </select>
+    </td>
+</tr>
+
+         <tr>
+    <td>BUS STOP</td>
+    <td>
+        <select name="select1" id="stop" required>
+            {% for stop in bus_stops %}
+                <option value="{{ stop.id }}" {% if stop.id == value.bus_stop.id %} selected {% endif %}>
+                    {{ stop.stop }}
+                </option>
+            {% endfor %}
+        </select>
+    </td>
+</tr>
+            <tr>
+                <td>EMAIL</td>
+                <td><input type="text" name="textfield11" required value="{{value.email}}"  /></td>
+            </tr>
+            <tr>
+                <td>PHOTO</td>
+                <td><input type="file" name="photo" /></td>
+            </tr>
+            <tr>
+                <td>PHONE NO</td>
+                <td><input type="text" name="textfield7" required value="{{value.phone}}" required pattern="[6789][0-9]{9}" title="Must contain  10 numbers" required/></td>
+            </tr>
+            <tr>
+                <td>ADDRESS</td>
+                <td><textarea name="textarea" required>{{value.address}}</textarea></td>
+            </tr>
+
+                <td colspan="2">
+                    <div align="center">
+                        <input type="submit" name="Submit" value="Submit" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+ <script>
+
+    document.getElementById('form1').addEventListener('submit', function(event) {
+        const emailField = document.querySelector('[name="textfield11"]');
+        const email = emailField.value;
+        const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+        if (!gmailPattern.test(email)) {
+            alert('Please enter a valid Gmail address ending with @gmail.com.');
+            emailField.focus();
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    // When the route is changed, fetch the corresponding bus stops
+    $("#route").change(function(){
+        var routeId = $(this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/view_bus_stop",
+            data: { rid: routeId },
+            success: function(data) {
+                var busStops = data.data;
+                $('#stop').empty();
+                $('#stop').append('<option value="">-- Select a Stop --</option>');
+
+                // Append the bus stops to the dropdown
+                for(var i = 0; i < busStops.length; i++) {
+                    $('#stop').append('<option value="' + busStops[i].id + '">' + busStops[i].stop + '</option>');
+                }
+            }
+        });
+    });
+</script>
+</body>
+{% endblock %}

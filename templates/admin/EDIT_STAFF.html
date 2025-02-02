@@ -1,0 +1,366 @@
+{#{% extends 'admin/indexhome2.html' %}#}
+{#{% block body %}#}
+{#<body>#}
+{#<form action="/EDITBUSSTAFF_post" method="post" enctype="multipart/form-data" name="form1" id="form1">{% csrf_token %}#}
+{#  <table width="429" height="447" border="1" align="center">#}
+{#  <tr>#}
+{#   <td>#}
+{#           <button height="110" align="right"> <a href="/VIEWHOME">HOME</a></button>#}
+{#          </td>#}
+{#  </tr>#}
+{#    <tr>#}
+{#      <th colspan="2" scope="col">BUS STAFF</th>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td width="195" scope="col">STAFF NAME </td>#}
+{#      <td width="218"><div align="center">#}
+{#        <input type="text" name="textfield"value="{{ value.name}}" />#}
+{#      </div></td>#}
+{#    </tr>#}
+{#    </tr>#}
+{##}
+{#      <td><div align="center">#}
+{#        <input type="text" name="textfield4" />#}
+{#      </div></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>BUS ROUTE </td>#}
+{#      <td><div align="center">#}
+{#        <select name="select">#}
+{#            {% for i in val %}#}
+{#                <option value="{{ i.id }}">FROM:({{i.from1}})  To:({{ i.to}})</option>#}
+{#            {% endfor %}#}
+{#        </select>#}
+{#        </div></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>EMAIL</td>#}
+{#      <td><div align="center">#}
+{#        <input type="text" name="textfield1"value="{{ value.email}}"/>#}
+{#      </div></td>#}
+{#    </tr>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>PHONE NO </td>#}
+{#      <td><div align="center">#}
+{#        <input type="text" name="textfield7"value="{{ value.phone}}" />#}
+{#      </div></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>ADDRESS</td>#}
+{#      <td><div align="center">#}
+{#        <textarea name="textarea"value="{{ value.address}}" ></textarea>#}
+{#      </div></td>#}
+{#    </tr>#}
+{##}
+{#    <tr>#}
+{#      <td colspan="2"><div align="center">#}
+{#        <input type="submit" name="Submit" value="Submit" />#}
+{#      </div></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+{#{% extends 'admin/indexhome2.html' %}#}
+{#{% block body %}#}
+{#<head>#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">#}
+{#    <style>#}
+{#        body {#}
+{#            font-family: 'Arial', sans-serif;#}
+{#            background-color: #eef2f3;#}
+{#            margin: 0;#}
+{#            padding: 20px;#}
+{#        }#}
+{#        .container {#}
+{#            max-width: 600px;#}
+{#            margin: auto;#}
+{#            background: white;#}
+{#            border-radius: 10px;#}
+{#            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);#}
+{#            padding: 30px;#}
+{#            transition: transform 0.2s;#}
+{#        }#}
+{#        .container:hover {#}
+{#            transform: scale(1.02);#}
+{#        }#}
+{#        h2 {#}
+{#            text-align: center;#}
+{#            color: #333;#}
+{#            margin-bottom: 20px;#}
+{#        }#}
+{#        table {#}
+{#            width: 100%;#}
+{#            margin: 20px 0;#}
+{#        }#}
+{#        th {#}
+{#            background-color: #007bff;#}
+{#            color: white;#}
+{#            padding: 12px;#}
+{#            border-radius: 8px 8px 0 0;#}
+{#        }#}
+{#        td {#}
+{#            padding: 12px;#}
+{#        }#}
+{#        input[type="text"],#}
+{#        select,#}
+{#        textarea {#}
+{#            width: 100%;#}
+{#            padding: 12px;#}
+{#            border: 1px solid #ddd;#}
+{#            border-radius: 5px;#}
+{#            transition: border-color 0.3s, box-shadow 0.3s;#}
+{#        }#}
+{#        input[type="text"]:focus,#}
+{#        select:focus,#}
+{#        textarea:focus {#}
+{#            border-color: #007bff;#}
+{#            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);#}
+{#            outline: none;#}
+{#        }#}
+{#        input[type="submit"] {#}
+{#            background-color: #007bff;#}
+{#            color: white;#}
+{#            border: none;#}
+{#            padding: 12px;#}
+{#            border-radius: 5px;#}
+{#            cursor: pointer;#}
+{#            transition: background-color 0.3s, transform 0.2s;#}
+{#            width: 100%;#}
+{#            font-size: 16px;#}
+{#            font-weight: bold;#}
+{#        }#}
+{#        input[type="submit"]:hover {#}
+{#            background-color: #0056b3;#}
+{#            transform: translateY(-2px);#}
+{#        }#}
+{#        .home-button {#}
+{#            background-color: #28a745;#}
+{#            color: white;#}
+{#            border: none;#}
+{#            padding: 12px;#}
+{#            border-radius: 5px;#}
+{#            cursor: pointer;#}
+{#            text-decoration: none;#}
+{#            display: inline-block;#}
+{#            text-align: center;#}
+{#            font-size: 16px;#}
+{#            font-weight: bold;#}
+{#            margin-top: 10px;#}
+{#        }#}
+{#        .home-button:hover {#}
+{#            background-color: #218838;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#<div class="container">#}
+{#    <form action="/EDITBUSSTAFF_post" method="post" enctype="multipart/form-data" name="form1" id="form1">#}
+{#        {% csrf_token %}#}
+{##}
+{#        <h2>BUS STAFF</h2>#}
+{#        <table>#}
+{#            <tr>#}
+{#                <td>STAFF NAME</td>#}
+{#                <td><input type="text" name="textfield" value="{{ value.name }}" placeholder="Enter staff name" required /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>BUS ROUTE</td>#}
+{#                <td>#}
+{#                    <select name="select" required>#}
+{#                        {% for i in val %}#}
+{#                            <option value="{{ i.id }}" {% if i.id == value.route_id %}selected{% endif %}>#}
+{#                                FROM: ({{ i.from1 }}) To: ({{ i.to }})#}
+{#                            </option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                </td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>EMAIL</td>#}
+{#                <td><input type="text" name="textfield1" value="{{ value.email }}" placeholder="Enter your email" required /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>PHONE NO</td>#}
+{#                <td><input type="text" name="textfield7" value="{{ value.phone }}" placeholder="Enter your phone number" pattern="\d{10}" required /></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>ADDRESS</td>#}
+{#                <td><textarea name="textarea" placeholder="Enter your address" required>{{ value.address }}</textarea></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td colspan="2">#}
+{#                    <input type="submit" name="Submit" value="Submit" />#}
+{#                </td>#}
+{#            </tr>#}
+{#        </table>#}
+{#    </form>#}
+{#</div>#}
+{#</body>#}
+{#{% endblock %}#}
+
+
+{% extends 'admin/indexhome2.html' %}
+
+{% block body %}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eef2f3;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: transform 0.2s;
+        }
+        .container:hover {
+            transform: scale(1.02);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border-radius: 8px 8px 0 0;
+        }
+        td {
+            padding: 12px;
+        }
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .home-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .home-button:hover {
+            background-color: #218838;
+        }
+        /* Back Button Style */
+        .back-button {
+            background-color: #f8f9fa;
+            color: #007bff;
+            border: 1px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        .back-button i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-button"><i class="fas fa-arrow-left"></i>Back</a>
+
+    <form action="/EDITBUSSTAFF_post" method="post" enctype="multipart/form-data" name="form1" id="form1">
+        {% csrf_token %}
+
+        <h2>BUS STAFF</h2>
+        <table>
+            <tr>
+                <td>STAFF NAME</td>
+                <td><input type="text" name="textfield" value="{{ value.name }}" placeholder="Enter staff name" required /></td>
+            </tr>
+            <tr>
+                <td>BUS ROUTE</td>
+                <td>
+                    <select name="select" required>
+                        {% for i in val %}
+                            <option value="{{ i.id }}" {% if i.id == value.route_id %}selected{% endif %}>
+                                FROM: ({{ i.from1 }}) To: ({{ i.to }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>EMAIL</td>
+                <td><input type="text" name="textfield1" value="{{ value.email }}" placeholder="Enter your email" required /></td>
+            </tr>
+            <tr>
+                <td>PHONE NO</td>
+                <td><input type="text" name="textfield7" value="{{ value.phone }}" placeholder="Enter your phone number" pattern="\d{10}" required /></td>
+            </tr>
+            <tr>
+                <td>ADDRESS</td>
+                <td><textarea name="textarea" placeholder="Enter your address" required>{{ value.address }}</textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="Submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+
+{% endblock %}

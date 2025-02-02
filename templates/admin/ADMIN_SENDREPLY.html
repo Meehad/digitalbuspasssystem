@@ -1,0 +1,88 @@
+{% extends 'admin/indexhome2.html' %}
+{% block body %}
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4; /* Light background for contrast */
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 600px; /* Set a max width for the container */
+        margin: auto;
+        background: white; /* White background for the form */
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        padding: 20px;
+        position: relative; /* For positioning the back button */
+    }
+    h2 {
+        text-align: center;
+        color: #007BFF; /* Heading color */
+        margin-bottom: 20px;
+    }
+    textarea {
+        width: 100%;
+        height: 200px; /* Set a height for the textarea */
+        border-radius: 4px;
+        border: 1px solid #ccc; /* Border for the textarea */
+        padding: 10px; /* Padding inside the textarea */
+        font-size: 16px; /* Font size */
+        resize: none; /* Prevent resizing */
+    }
+    textarea:focus {
+        border-color: #007BFF; /* Change border color on focus */
+        outline: none; /* Remove default outline */
+    }
+    input[type="submit"] {
+        background-color: #007BFF; /* Button background color */
+        color: white; /* Button text color */
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px; /* Padding for the button */
+        cursor: pointer;
+        font-size: 16px; /* Font size */
+        margin-top: 10px; /* Space above the button */
+        transition: background-color 0.3s; /* Smooth background change */
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+    }
+    .back-button {
+        position: absolute; /* Positioning it at the top left */
+        top: 10px;
+        left: 10px;
+        background-color: #007BFF; /* Background color for the button */
+        border: none; /* No border */
+        border-radius: 50%; /* Make it round */
+        cursor: pointer;
+        font-size: 24px; /* Increase font size for a bigger arrow */
+        color: white; /* Color of the arrow */
+        width: 50px; /* Width of the button */
+        height: 50px; /* Height of the button */
+        display: flex;
+        align-items: center; /* Center the arrow vertically */
+        justify-content: center; /* Center the arrow horizontally */
+        transition: transform 0.3s, background-color 0.3s; /* Smooth transitions */
+    }
+    .back-button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+        transform: scale(1.1); /* Slightly increase size on hover */
+    }
+</style>
+
+<body>
+<div class="container">
+    <button class="back-button" onclick="window.history.back();">&#8592;</button>
+    <h2>REPLY</h2>
+    <form id="form1" name="form1" method="post" action="/REPLY_post">{% csrf_token %}
+        <textarea name="textarea" placeholder="Type your reply here..."></textarea>
+        <p align="center">
+            <input name="SEND" type="submit" id="SEND" value="SEND" />
+        </p>
+    </form>
+</div>
+</body>
+{% endblock %}

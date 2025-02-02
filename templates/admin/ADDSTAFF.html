@@ -1,0 +1,160 @@
+{% extends 'admin/indexhome2.html' %}
+{% block body %}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+        .form-header {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        h2 {
+            margin: 0;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            border-radius: 8px 8px 0 0;
+        }
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+        input[type="text"],
+        select,
+        textarea {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            margin-bottom: 15px;
+        }
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .home-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+        .special-container {
+            background-color: #f8f9fa; /* Light background for the form */
+            padding: 20px;
+            border-radius: 4px; /* Rounded corners */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="/ADDBUSSTAFF_post" method="post" enctype="multipart/form-data" name="form1" id="form1">
+        {% csrf_token %}
+        <div class="form-header">
+            <h2>ADD BUS STAFF</h2>
+        </div>
+        <div class="special-container">
+            <table>
+                <tr>
+                    <td>STAFF NAME</td>
+                    <td><input type="text" name="textfield" required pattern="[a-zA-Z\s\.]+" placeholder="Enter staff name" /></td>
+                </tr>
+                <tr>
+                    <td>BUS ROUTE</td>
+                    <td>
+                        <select name="select" required>
+                            {% for i in val %}
+                                <option value="{{ i.id }}">FROM: ({{ i.from1 }}) TO: ({{ i.to }})</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EMAIL</td>
+                    <td><input type="text" name="textfield1" required pattern="[a-z0-9_.]+@[a-z]+\.[a-z]+" placeholder="Enter email" /></td>
+                </tr>
+                <tr>
+                    <td>PHONE NO</td>
+                    <td><input type="text" name="textfield7" required pattern="[9876][0-9]{9}" placeholder="Enter phone number" /></td>
+                </tr>
+                <tr>
+                    <td>ADDRESS</td>
+                    <td><textarea name="textarea" placeholder="Enter address" required></textarea></td>
+                </tr>
+                <tr>
+                    <td>USERNAME</td>
+                    <td><input type="text" name="textfield9" required placeholder="Enter username" /></td>
+                </tr>
+                <tr>
+                    <td>PASSWORD</td>
+                    <td><input type="text" name="textfield10" required placeholder="Enter password" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="Submit" value="Submit" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+{% endblock %}
+

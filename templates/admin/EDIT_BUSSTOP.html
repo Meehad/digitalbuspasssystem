@@ -1,0 +1,114 @@
+{% extends 'admin/indexhome2.html' %}
+{% block body %}
+
+<style>
+    body {
+        background-color: #f4f4f4; /* Light background for contrast */
+        font-family: Arial, sans-serif; /* Clean font */
+    }
+    .container {
+        max-width: 600px; /* Limit the width of the card */
+        margin: 50px auto; /* Center the card */
+        padding: 20px; /* Add padding */
+        background-color: #ffffff; /* White background for the card */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        position: relative; /* For positioning the back button */
+    }
+    .back-button {
+        position: absolute; /* Position it absolutely */
+        left: 15px; /* Distance from the left */
+        top: 15px; /* Distance from the top */
+        background-color: #28a745; /* Green background */
+        border: none; /* No border */
+        border-radius: 50%; /* Circular button */
+        cursor: pointer; /* Pointer cursor */
+        font-size: 18px; /* Arrow size */
+        color: white; /* White arrow color */
+        width: 36px; /* Button width */
+        height: 36px; /* Button height */
+        display: flex; /* Center content */
+        align-items: center; /* Center vertically */
+        justify-content: center; /* Center horizontally */
+        transition: background-color 0.3s; /* Transition for hover effect */
+    }
+    .back-button:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+    table {
+        width: 100%; /* Full width */
+        margin-top: 20px; /* Space above the table */
+        border-collapse: collapse; /* Remove space between borders */
+    }
+    td {
+        padding: 10px; /* Add padding to table cells */
+        border: 1px solid #e0e0e0; /* Light border for cells */
+    }
+    label {
+        font-weight: bold; /* Bold labels */
+    }
+    input[type="text"], select {
+        width: 100%; /* Full width */
+        padding: 10px; /* Padding inside input fields */
+        border: 1px solid #ccc; /* Border for input fields */
+        border-radius: 4px; /* Rounded corners */
+        font-size: 16px; /* Font size */
+        box-sizing: border-box; /* Include padding in width */
+    }
+    input[type="submit"] {
+        background-color: #007BFF; /* Blue button */
+        color: white; /* White text for button */
+        border: none; /* No border */
+        padding: 10px 20px; /* Padding for button */
+        border-radius: 4px; /* Rounded corners for button */
+        font-size: 16px; /* Font size for button */
+        cursor: pointer; /* Pointer cursor */
+        transition: background-color 0.3s; /* Smooth transition for hover */
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+</style>
+
+<div class="container">
+    <button class="back-button" onclick="javascript:history.back()">&#8592;</button> <!-- Back arrow button -->
+    <h2 class="text-center">Edit Bus Stop</h2> <!-- Centered heading -->
+    <form id="form1" name="form1" method="post" action="/editbusstop_post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>BUS-ROUTE</td>
+                <td>
+                    <select name="select" required>
+                        {% for i in val %}
+                            <option value="{{ i.id }}">{{ i.from1 }} to {{ i.to }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>STOP</td>
+                <td><input type="text" name="textfield2" value="{{ value.stop }}" required /></td>
+            </tr>
+            <tr>
+                <td>LATITUDE</td>
+                <td><input type="text" name="textfield3" value="{{ value.latitude }}" required /></td>
+            </tr>
+            <tr>
+                <td>LONGITUDE</td>
+                <td><input type="text" name="textfield4" value="{{ value.longitude }}" required /></td>
+            </tr>
+            <tr>
+                <td>FEE</td>
+                <td><input type="text" name="textfield5" value="{{ value.fee }}" required /></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input name="ADD" type="submit" id="ADD" value="Update" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock %}

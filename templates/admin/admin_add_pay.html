@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-weight: bold;
+      color: white;
+      background-color: #007bff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .card {
+      background-color: #1e3c69;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-content {
+      color: white;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .dropdown-container,
+    .amount-container {
+      margin: 20px 0;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    select {
+      background-color: white;
+    }
+
+    input {
+      background-color: white;
+      color: #333;
+    }
+
+    button {
+      background-color: #000;
+      color: white;
+      padding: 10px 40px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Payment</h1>
+    </header>
+<form action="/insert_payment" method="post">
+
+    <main>
+      <div class="card">
+        <div class="card-content">
+          <h2>Choose Your Package</h2>
+          <div class="dropdown-container">
+            <select id="packageSelect" onchange="updateAmount()">
+              <option value="" disabled selected>Select No of Trips</option>
+              <option value="20">20 TRIPS</option>
+              <option value="40">40 TRIPS</option>
+            </select>
+          </div>
+
+          <div class="amount-container">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" value="{{ fee }}" name="amount" readonly> <!-- Default fee value -->
+          </div>
+
+          <input type="submit">
+        </div>
+      </div>
+    </main>
+  </div>
+ </form>
+  <script>
+    let selectedPackage = null;
+    let fee = null; // Variable to store the fee value
+    const amountInput = document.getElementById("amount");
+    const payButton = document.getElementById("payButton");
+
+    // Store the fee value when the dropdown is first changed
+    function storeFeeValue() {
+      if (fee === null) {
+        fee = parseInt(amountInput.value) || 0; // Store fee value only once
+      }
+    }
+
+    function updateAmount() {
+      storeFeeValue(); // Store fee value only the first time the dropdown is changed
+
+      selectedPackage = document.getElementById("packageSelect").value;
+
+      let amount = 0;
+
+      if (selectedPackage === "20") {
+        amount = 20 * fee; // Multiply stored fee by 20
+      } else if (selectedPackage === "40") {
+        amount = 40 * fee; // Multiply stored fee by 40
+      }
+
+      amountInput.value = amount; // Update the input field with the calculated amount
+      payButton.disabled = false; // Enable Pay Now button
+    }
+
+    function payNow() {
+      // Logic to proceed with the payment (e.g., redirect to payment gateway or show confirmation)
+      alert("Payment processing... Amount: " + amountInput.value);
+    }
+  </script>
+</body>
+</html>

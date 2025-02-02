@@ -1,0 +1,173 @@
+{% extends 'admin/indexhome2.html' %}
+{% block body %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa; /* Light background for contrast */
+        margin: 0;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        background-color: #ffffff; /* White background for the table */
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* Remove spacing between cells */
+        margin-top: 20px; /* Space above the table */
+    }
+
+    th, td {
+        padding: 15px; /* Padding for cells */
+        text-align: center;
+        border: 1px solid #ddd; /* Border for cells */
+        transition: background-color 0.3s; /* Animation on hover */
+    }
+
+    th {
+        background-color: #007bff; /* Header background color */
+        color: white; /* Header text color */
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Zebra striping for rows */
+    }
+
+    tr:hover {
+        background-color: #e9ecef; /* Change background color on hover */
+    }
+
+    img {
+        max-width: 100px; /* Adjusted image size */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 5px; /* Rounded corners for images */
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    select, input[type="text"], input[type="submit"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: #28a745; /* Green submit button */
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+    .action-links {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center; /* Center buttons */
+        margin-top: 10px; /* Space above action links */
+    }
+
+    .action-links a {
+        text-decoration: none;
+        color: #007bff;
+        padding: 5px 10px; /* Reduced padding */
+        font-size: 14px; /* Decreased font size */
+        border: 1px solid transparent;
+        border-radius: 5px;
+        margin: 5px 0; /* Vertical margin for spacing */
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .action-links a:hover {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .view-payment {
+        background-color: #17a2b8; /* Different background color for VIEW PAYMENT */
+        color: white;
+    }
+
+    .view-payment:hover {
+        background-color: #138496; /* Darker shade on hover for VIEW PAYMENT */
+    }
+</style>
+
+<div class="container">
+    <h2>Manage Students</h2>
+    <form id="form1" name="form1" method="post" action="/BLOCKSTUDENT_search">
+        {% csrf_token %}
+        <div class="search-container">
+            <label for="routeSelect">BUS ROUTE:</label>
+            <select name="select" id="routeSelect">
+            <option value="">Select the route</option>
+                {% for i in route %}
+                    <option value="{{ i.id }}{% if busroute == i.id %} selected {% endif %}">FROM:({{i.from1}}) TO:({{ i.to}})</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="textfield" placeholder="Search student..."/>
+            <input name="Submit" type="submit" value="SEARCH" />
+        </div>
+
+        <table>
+            <tr>
+                <th>NAME</th>
+                <th>IMAGE</th>
+                <th>ADMISSION-NO</th>
+                <th>BATCH</th>
+                <th>DEPARTMENT</th>
+                <th>PHONE</th>
+                <th>EMAIL</th>
+                <th>ACTIONS</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td><img src="{{ i.photo.url }}" alt="{{ i.name }}'s photo" /></td>
+                <td>{{ i.admissions }}</td>
+                <td>{{ i.batch }}</td>
+                <td>{{ i.department }}</td>
+                <td>{{ i.phone }}</td>
+                <td>{{ i.email }}</td>
+                <td>
+                    <div class="action-links">
+                        <div>
+                            <a href="/BLOCKSTUDENT_post/{{i.LOGIN.id}}">BLOCK</a>
+                            <a href="/UNBLOCK/{{i.LOGIN.id}}">UNBLOCK</a>
+                        </div>
+                        <br/>
+                        <div>
+                            <a href="/VIEWPAYMENT/{{ i.id }}" class="btn btn-info">VIEW PAYMENT</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+
+{% endblock %}

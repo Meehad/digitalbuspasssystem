@@ -1,0 +1,96 @@
+{% extends 'admin/indexhome2.html' %}
+{% block body %}
+
+<style>
+    body {
+        background-color: #f4f4f4; /* Light background for contrast */
+        font-family: Arial, sans-serif; /* Use a clean font */
+    }
+    .container {
+        max-width: 600px; /* Limit the width of the form */
+        margin: 50px auto; /* Center the form with margin */
+        padding: 20px; /* Add padding */
+        background-color: #ffffff; /* White background for the form */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        position: relative; /* Positioning for absolute button */
+    }
+    .back-button {
+        position: absolute; /* Position it absolutely */
+        left: 15px; /* Distance from the left */
+        top: 15px; /* Distance from the top */
+        background-color: #28a745; /* Green background */
+        border: none; /* No border */
+        color: white; /* White text */
+        border-radius: 50%; /* Circular button */
+        padding: 8px; /* Padding for the button */
+        font-size: 20px; /* Arrow size */
+        cursor: pointer; /* Pointer cursor */
+        transition: background-color 0.3s; /* Smooth transition for hover */
+    }
+    .back-button:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+    h2 {
+        text-align: center; /* Center the heading */
+        color: #007BFF; /* Blue color for the heading */
+    }
+    table {
+        width: 100%; /* Full width */
+        margin-top: 20px; /* Space above the table */
+    }
+    td {
+        padding: 10px; /* Add padding to table cells */
+    }
+    input[type="text"] {
+        width: 100%; /* Full width of input fields */
+        padding: 10px; /* Padding inside the input fields */
+        border: 1px solid #ccc; /* Border for input fields */
+        border-radius: 4px; /* Rounded corners for input fields */
+        font-size: 16px; /* Font size for input */
+    }
+    input[type="submit"] {
+        background-color: #28a745; /* Green background for submit button */
+        color: white; /* White text for button */
+        border: none; /* No border */
+        padding: 10px 20px; /* Padding for button */
+        border-radius: 4px; /* Rounded corners for button */
+        font-size: 16px; /* Font size for button */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s; /* Smooth transition for hover */
+    }
+    input[type="submit"]:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+</style>
+
+<div class="container">
+    <button class="back-button" onclick="javascript:history.back()">&#8592;</button> <!-- Left arrow -->
+    <h2>Add Bus Route</h2>
+    <form id="form1" name="form1" method="post" action="/BUSROUTE_post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>FROM</td>
+                <td><input type="text" name="textfield22" required /></td>
+            </tr>
+            <tr>
+                <td>TO</td>
+                <td><input type="text" name="textfield2" required /></td>
+            </tr>
+            <tr>
+                <td>BUS-NO</td>
+                <td><input type="text" name="textfield3" required /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div align="center">
+                        <input name="ADD" type="submit" id="ADD" value="ADD" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock %}

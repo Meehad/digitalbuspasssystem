@@ -1,0 +1,93 @@
+{% extends 'admin/indexhome2.html' %}
+{% block body %}
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px; /* Set maximum width */
+            margin: 0 auto; /* Center the form */
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px; /* Add spacing below heading */
+        }
+        label {
+            display: block; /* Block display for labels */
+            margin-bottom: 5px; /* Spacing between label and input */
+            font-weight: bold;
+            color: #333;
+        }
+        select, textarea, input[type="submit"], input[type="reset"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        select:focus, textarea:focus {
+            border-color: #007bff; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+        }
+        textarea {
+            height: 150px; /* Set textarea height */
+            resize: none; /* Disable resizing */
+        }
+        input[type="submit"], input[type="reset"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Add spacing above buttons */
+        }
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        .button-container {
+            display: flex; /* Flex container for buttons */
+            justify-content: space-between; /* Space between buttons */
+            margin-top: 15px; /* Add gap between buttons and form elements */
+        }
+        .button-container input {
+            flex: 1; /* Allow buttons to take equal space */
+            margin-right: 10px; /* Add space between buttons */
+        }
+        .button-container input:last-child {
+            margin-right: 0; /* Remove margin from the last button */
+        }
+    </style>
+</head>
+
+<div class="container">
+    <h2> Notification To Bus </h2>
+    <form id="form1" name="form1" method="post" action="/NOTIFICATIONTOBUS_post">
+        {% csrf_token %}
+        <label for="bus_number">Select Bus Number:</label>
+        <select name="bus_number" required id="bus_number">
+            {% for i in bus %}
+                <option value="{{ i.id }}">({{ i.busnum }})</option>
+            {% endfor %}
+        </select>
+
+        <label for="notification">Notification:</label>
+        <textarea name="notification" id="notification" required placeholder="Enter your notification here..."></textarea>
+
+        <div class="button-container">
+            <input name="SEND" type="submit" id="SEND" value="SEND" />
+            <input name="CLEAR" type="reset" value="CLEAR" />
+        </div>
+    </form>
+</div>
+{% endblock %}

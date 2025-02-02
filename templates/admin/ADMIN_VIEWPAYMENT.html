@@ -1,0 +1,102 @@
+{% extends 'admin/indexhome2.html' %}
+{% block body %}
+
+<style>
+    body {
+        background-color: #f4f4f4; /* Light background for contrast */
+        font-family: Arial, sans-serif; /* Clean font */
+    }
+    .container {
+        max-width: 600px; /* Limit the width of the card */
+        margin: 50px auto; /* Center the card */
+        padding: 20px; /* Add padding */
+        background-color: #ffffff; /* White background for the card */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        position: relative; /* For positioning the back button */
+    }
+    .back-button {
+        position: absolute; /* Position it absolutely */
+        left: 15px; /* Distance from the left */
+        top: 15px; /* Distance from the top */
+        background-color: #28a745; /* Green background */
+        border: none; /* No border */
+        border-radius: 50%; /* Circular button */
+        cursor: pointer; /* Pointer cursor */
+        font-size: 18px; /* Arrow size */
+        color: white; /* White arrow color */
+        width: 36px; /* Button width */
+        height: 36px; /* Button height */
+        display: flex; /* Center content */
+        align-items: center; /* Center vertically */
+        justify-content: center; /* Center horizontally */
+        transition: background-color 0.3s; /* Transition for hover effect */
+    }
+    .back-button:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+    .add-button {
+        background-color: #007BFF; /* Blue background */
+        color: white; /* White text */
+        border: none; /* Remove border */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor */
+        font-size: 16px; /* Button text size */
+        padding: 10px 15px; /* Padding for button */
+        margin-bottom: 15px; /* Space below button */
+        display: flex; /* Use flex for alignment */
+        align-items: center; /* Center icon and text vertically */
+        gap: 8px; /* Space between icon and text */
+        transition: background-color 0.3s; /* Smooth hover effect */
+    }
+    .add-button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+    table {
+        width: 100%; /* Full width */
+        margin-top: 20px; /* Space above the table */
+        border-collapse: collapse; /* Remove space between borders */
+    }
+    th, td {
+        padding: 15px; /* Add padding to table cells */
+        border: 1px solid #e0e0e0; /* Light border for cells */
+        text-align: center; /* Center text */
+    }
+    th {
+        background-color: #007BFF; /* Blue background for header */
+        color: white; /* White text for header */
+    }
+    .value {
+        font-size: 16px; /* Font size for values */
+        font-weight: normal; /* Normal font weight */
+    }
+</style>
+
+<div class="container">
+    <button class="back-button" onclick="javascript:history.back()">&#8592;</button> <!-- Back arrow button -->
+    <h2 class="text-center">Payment Details</h2> <!-- Centered heading -->
+
+    <!-- Add New Payment Button -->
+    <button class="add-button" onclick="window.location.href='/add_payment'">
+        <span>➕</span> Add New Payment
+    </button>
+
+    <table>
+        <tr>
+            <th>AMOUNT</th>
+            <th>DATE</th>
+        </tr>
+        {% for payment in val %}
+        <tr>
+            <td class="value">{{ payment.amount }}</td> <!-- Display the amount -->
+            <td class="value">{{ payment.date }}</td> <!-- Display the date -->
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2" class="value">No payments found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

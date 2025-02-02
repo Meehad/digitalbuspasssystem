@@ -1,0 +1,140 @@
+{% extends 'admin/indexhome2.html' %}
+{% block body %}
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .button-home {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .search-container {
+            background-color: #e9f6ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        select, input[type="submit"] {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        .complaint-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 15px 0;
+            padding: 15px;
+            position: relative;
+        }
+        .complaint-card .username {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .complaint-content {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            background-color: #f9f9f9;
+        }
+        .complaint-card .date {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #888;
+            font-size: 14px;
+        }
+        .reply {
+            margin-top: 15px; /* Spacing for the reply button */
+            text-align: right;
+        }
+        .reply-button {
+            background-color: white;
+            color: #007BFF;
+            border: 1px solid #007BFF;
+            border-radius: 4px;
+            padding: 8px 15px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .reply-button:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<div class="container">
+    <h2>COMPLAINTS</h2>
+    <form id="form1" name="form1" method="post" action="/VIEWCOMPLAINTS_post">
+        {% csrf_token %}
+        <div class="search-container">
+            <label for="type">TYPE:</label>
+            <select name="select">
+                <option>All</option>
+                <option>students</option>
+                <option>Bus staff</option>
+            </select>
+            <input name="SEND" type="submit" id="SEND" value="SEARCH" />
+        </div>
+
+        {% for i in comp %}
+        <div class="complaint-card">
+            <div class="username">{{ i.LOGIN.username }}</div>
+            <div class="date">{{ i.date }}</div>
+            <div class="complaint-content">
+                <p><strong>Complaint:</strong> {{ i.complaint }}</p>
+            </div>
+            <div class="reply">
+                {% if i.reply == 'pending' %}
+                <a href="/REPLY/{{ i.id }}" class="reply-button">REPLY</a> <!-- Outlined button -->
+                {% else %}
+                {{ i.reply }}
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </form>
+</div>
+{% endblock %}
