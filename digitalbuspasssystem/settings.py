@@ -86,12 +86,12 @@ WSGI_APPLICATION = 'digitalbuspasssystem.wsgi.application'
 if(os.getenv('production')==True):
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'digital_bus_passes',
-            'PORT': '3306',
-            'PASSWORD': 'root',
-            'HOST': 'localhost',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'digipass_db',
             'USER': 'root',
+            'PASSWORD': 'pGivywgW2oCDqW5YCO4QM0JHVk0qBwHm',
+            'HOST': 'dpg-cuh07p3v2p9s73cp1c20-a',
+            'PORT': '5432',
         }
     }
 else:
